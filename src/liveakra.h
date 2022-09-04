@@ -58,6 +58,7 @@ la_record_t* la_create_record();
 
 int la_record_add_field(la_record_t* record, la_field_t* field);
 la_field_t* la_record_get_field(la_record_t* record, int at);
+bool la_record_delete_field(la_record_t* record, int at);
 
 void la_delete_field(la_field_t* field);
 void la_delete_record(la_record_t* record);

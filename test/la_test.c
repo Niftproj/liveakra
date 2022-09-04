@@ -63,7 +63,11 @@ int main(void) {
         test_assert(list->head->next->prev->next->data == "sample2");
         test_assert(la_list_get_node(list, 0)->data == "sample");
         test_assert(la_list_get_node(list, 1)->data == "sample2");
-
+        test_assert(la_list_remove_node(list, 0) == true);
+        test_assert(la_list_get_node(list, 0)->data == "sample2");
+        test_assert(list->count == 1);
+        test_assert(la_list_remove_node(list, 1) == true);
+        test_assert(list->count == 0);
         la_list_delete(list);
     }
 
@@ -79,6 +83,8 @@ int main(void) {
         test_assert(la_record_get_field(record1, 1) == num_field);
         test_assert(la_record_get_field(record1, 0)->label == "name");
         test_assert(la_return_num_value(la_record_get_field(record1, 1)) == 9);
+        test_assert(la_record_delete_field(record1, 0) == true);
+        test_assert(la_record_get_field(record1, 0) == num_field);
         la_delete_record(record1);
     }
 

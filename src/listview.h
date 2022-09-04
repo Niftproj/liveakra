@@ -2,6 +2,8 @@
  * this file is part of liveakra (http://github.com/niftproj/liveakra)
 */
 
+#include <stdbool.h>
+
 #ifndef LIVEAKRA_LISTVIEW_H
 #define LIVEAKRA_LISTVIEW_H
 
@@ -25,5 +27,6 @@ la_list_node_t* la_create_list_node(void* data);
 int la_list_add_node(la_list_t* list, void* data);
 void la_list_delete(la_list_t* list);
 la_list_node_t* la_list_get_node(la_list_t* list, int at);
+bool la_list_remove_node(la_list_t* list, int at);
 
 #endif

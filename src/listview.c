@@ -66,6 +66,36 @@ la_list_node_t* la_list_get_node(la_list_t* list, int at)
     return node;
 }
 
+bool la_list_remove_node(la_list_t* list, int at)
+{
+    if(at > list->count || list->count == 0)
+        return false;
+    
+    if(at == 0)
+    {
+        la_list_node_t* node = list->head->next;
+        node->prev = NULL;  // as it will now on head
+        list->head = node;  // overwrite head with its next
+        list->count -= 1;
+        return true;
+    }
+
+    int index = at;
+    la_list_node_t* node = list->head;
+    while (node->next != NULL && index > 0)
+    {
+        index -= 1;
+        node = node->next;
+    }
+
+    la_list_node_t* node_backup = node->next;
+    // node_backup->prev = node->prev;
+    node = node_backup;
+    list->count -= 1;
+    
+    return true;
+}
+
 void la_list_delete(la_list_t* list)
 {
     free(list);

@@ -28,6 +28,11 @@ la_field_t* la_record_get_field(la_record_t* record, int at)
     return (la_field_t*)la_list_get_node(record->fields, at)->data;
 }
 
+bool la_record_delete_field(la_record_t* record, int at)
+{
+    return la_list_remove_node(record->fields, at);
+}
+
 void la_delete_field(la_field_t* field)
 {
     free(field);
