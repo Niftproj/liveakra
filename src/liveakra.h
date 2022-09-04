@@ -37,7 +37,6 @@ typedef struct la_field la_field_t;
 struct la_record
 {
     la_list_t* fields;
-    int field_count;
 };
 typedef struct la_record la_record_t;
 
@@ -51,6 +50,7 @@ la_record_t* la_create_record_with_data(la_list_t* fields, int field_counts);
 la_record_t* la_create_record();
 
 void la_delete_field(la_field_t* field);
+void la_delete_record(la_record_t* record);
 
 char* la_return_str_value(la_field_t* field);
 int la_return_num_value(la_field_t* field);

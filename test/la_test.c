@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "liveakra.h"
+#include "listview.h"
 
 /* test */
 #define test_section(desc)\
@@ -47,6 +48,31 @@ int main(void) {
         la_delete_field(num_field);
     }
     
+    {
+        test_section("la_record:");
+        la_record_t* record1 = la_create_record();
+        test_assert(record1->fields->count == 0);
+        la_delete_record(record1);
+    }
+
+    {
+        test_section("la_listview: create_list");
+        la_list_t* list = la_create_list();
+        test_assert(list->head == NULL);
+        test_assert(list->count == 0);
+        test_assert(la_list_add_node(list, "sample") == 1);
+        test_assert(list->count == 1);
+        test_assert(list->head->data == "sample");
+        test_assert(la_list_add_node(list, "sample2") == 2);
+        test_assert(list->count == 2);
+        test_assert(list->head->next->data == "sample2");
+        test_assert(list->head->next->prev->data == "sample");
+        test_assert(list->head->next->prev->next->data == "sample2");
+
+        la_list_delete(list);
+    }
+
+    test_print_res();
 
     return 0;
 
