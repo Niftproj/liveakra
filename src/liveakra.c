@@ -10,6 +10,13 @@ la_field_t* la_create_field(char** label, void* value, la_field_types_t type)
     return field;
 }
 
+la_record_t* la_create_record()
+{
+    la_record_t* record = (la_record_t*)malloc(sizeof(la_record_t));
+    record->field_count = 0;
+    return record;
+}
+
 void la_delete_field(la_field_t* field)
 {
     free(field);

@@ -27,7 +27,6 @@
 int pass_count = 0;
 int fail_count = 0;
 
-
 int main(void) {
 
     printf("\n");
