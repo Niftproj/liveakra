@@ -17,6 +17,17 @@ la_record_t* la_create_record()
     return record;
 }
 
+int la_record_add_field(la_record_t* record, la_field_t* field)
+{
+    /* filter if field label is same */
+    return la_list_add_node(record->fields, (void*)field);
+}
+
+la_field_t* la_record_get_field(la_record_t* record, int at)
+{
+    return (la_field_t*)la_list_get_node(record->fields, at)->data;
+}
+
 void la_delete_field(la_field_t* field)
 {
     free(field);

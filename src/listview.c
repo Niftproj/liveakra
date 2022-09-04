@@ -47,6 +47,25 @@ int la_list_add_node(la_list_t* list, void* data)
     return list->count;
 }
 
+la_list_node_t* la_list_get_node(la_list_t* list, int at)
+{
+    if(at > list->count || list->count == 0)
+        return NULL;
+    
+    if(at == 0)
+        return list->head;
+
+    int index = at;
+    la_list_node_t* node = list->head;
+    while (node->next != NULL && index > 0)
+    {
+        index -= 1;
+        node = node->next;
+    }
+    
+    return node;
+}
+
 void la_list_delete(la_list_t* list)
 {
     free(list);

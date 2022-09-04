@@ -40,6 +40,13 @@ struct la_record
 };
 typedef struct la_record la_record_t;
 
+/**
+ * @brief bucket (buck)
+ */
+struct la_bucket
+{
+    la_list_t* records;
+};
 
 /**
  * @brief functions
@@ -48,6 +55,9 @@ typedef struct la_record la_record_t;
 la_field_t* la_create_field(char** label, void* value, la_field_types_t type);
 la_record_t* la_create_record_with_data(la_list_t* fields, int field_counts);
 la_record_t* la_create_record();
+
+int la_record_add_field(la_record_t* record, la_field_t* field);
+la_field_t* la_record_get_field(la_record_t* record, int at);
 
 void la_delete_field(la_field_t* field);
 void la_delete_record(la_record_t* record);

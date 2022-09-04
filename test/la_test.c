@@ -47,13 +47,6 @@ int main(void) {
         test_assert(la_return_num_value(num_field) == 9);
         la_delete_field(num_field);
     }
-    
-    {
-        test_section("la_record:");
-        la_record_t* record1 = la_create_record();
-        test_assert(record1->fields->count == 0);
-        la_delete_record(record1);
-    }
 
     {
         test_section("la_listview: create_list");
@@ -68,8 +61,25 @@ int main(void) {
         test_assert(list->head->next->data == "sample2");
         test_assert(list->head->next->prev->data == "sample");
         test_assert(list->head->next->prev->next->data == "sample2");
+        test_assert(la_list_get_node(list, 0)->data == "sample");
+        test_assert(la_list_get_node(list, 1)->data == "sample2");
 
         la_list_delete(list);
+    }
+
+    {
+        test_section("la_record:");
+        la_record_t* record1 = la_create_record();
+        test_assert(record1->fields->count == 0);
+        la_field_t* name_field = la_create_field("name", (void*)"lalu", LA_TYPE_STRING);
+        test_assert(la_record_add_field(record1, name_field) == 1);
+        la_field_t* num_field = la_create_field("rank", (void*)9, LA_TYPE_NUMBER);
+        test_assert(la_record_add_field(record1, num_field) == 2);
+        test_assert(la_record_get_field(record1, 0) == name_field);
+        test_assert(la_record_get_field(record1, 1) == num_field);
+        test_assert(la_record_get_field(record1, 0)->label == "name");
+        test_assert(la_return_num_value(la_record_get_field(record1, 1)) == 9);
+        la_delete_record(record1);
     }
 
     test_print_res();
